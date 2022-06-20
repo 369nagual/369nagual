@@ -2,8 +2,6 @@ import pyautogui
 import time
 import os
 
-# from startup import run_sound
-
 flag = True
 
 

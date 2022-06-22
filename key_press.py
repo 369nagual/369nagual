@@ -3,29 +3,11 @@ def main():
     from html.parser import HTMLParser
     import pyautogui
     import time
-    import keyboard
     import os
     import urllib3
-    import re
     import pyperclip
-    from transliterate.base import TranslitLanguagePack, registry
-    from lxml import html
-    import vk_api
-    import vk_audio
 
-    from bs4 import BeautifulSoup
-
-    class KBDLanguagePack(TranslitLanguagePack):
-        language_code = "kbd"
-        language_name = "KeyBoard"
-        mapping = (
-            'QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>?qwertyuiop[]asdfghjkl;\'zxcvbnm,./',
-            'ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ,йцукенгшщзхъфывапролджэячсмитьбю.',
-        )
-
-    registry.register(KBDLanguagePack)
     # проверяем регистрацию пакета
-    from transliterate import get_available_language_codes, translit
 
     class MyHTMLParser(HTMLParser):
         def handle_starttag(self, tag, attrs):
@@ -53,8 +35,6 @@ def main():
             pyautogui.press("enter")
             pyautogui.click(x=1521, y=90)
 
-    #
-    #
     def vk_music(sng="25/17", info=False):
         if info is True:
             print("vk_music() ==>", end=" ")
@@ -89,30 +69,11 @@ def main():
         else:
             return None
 
-    print(pyautogui.position())
-
     def vk_find_first_artist(url="https://vk.com/"):
         http_pool = urllib3.connection_from_url(url)
         r = http_pool.urlopen('GET', url)
         file = open("write_in_here.html", "w")
         file.write(r.data.decode("utf-8"))
-        #
-        #
-        #
-        #
-        #
-        #
-        #
-        #
-        #
-        #
-        # http = urllib3.PoolManager()
-        #
-        # parser = MyHTMLParser()
-        # parser.feed('<html><head><title>Test</title></head>'
-        #             '<body><h1>Parse me!</h1></body></html>')
-
-    # vk_find_first_artist(url="https://vk.com/")
 
     def firefox(info=False):
         if info is True:
@@ -126,7 +87,7 @@ def main():
             time.sleep(1)
             pyautogui.press("enter")
 
-    def exit_point(path, file=None, info=False):
+    def exit_point(path, info=False):
         if info is True:
             print("exit_point() ==>", end=" ")
             print("Matches list of images from path. If found: break")
@@ -169,13 +130,12 @@ def main():
     song = pyautogui.prompt(text="Введите музыку", title="Музыка", default="25/17")
     if song is None:
         exit()
-    # new_text = translit(song, language_code='kbd')
     # change_keyboard_language()
     time.sleep(1)
-    # firefox(info=False)
-    # vk(info=False)
+    firefox(info=True)
+    vk(info=True)
     time.sleep(2)
-    vk_music(sng=song, info=False)
+    vk_music(sng=song, info=True)
     next_music()
     #
     #

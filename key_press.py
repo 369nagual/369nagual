@@ -1,11 +1,77 @@
-# !/usr/bin/env python
+#!/usr/bin/env python3
 def main():
-    from html.parser import HTMLParser
     import pyautogui
     import time
     import os
-    import urllib3
     import pyperclip
+    import urllib3
+    from selenium import webdriver
+    from selenium.webdriver.firefox.service import Service
+    from selenium.webdriver.firefox.options import Options
+    from selenium.webdriver.common.by import By
+    # geckodriver’ executable needs to be in PATH
+    from webdriver_manager.firefox import GeckoDriverManager
+    from selenium.webdriver.common.action_chains import ActionChains
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+
+    def test():
+        to_list = "CatalogBlock__itemsContainer _audio_pl audio_w_covers"
+        from_list = to_list.split(" ")
+        print(from_list)
+        return from_list
+
+    def test_2():
+        pass
+
+    def selenium(music="все будет хорошо", info=False):
+        if info:
+            print("Selenium test function")
+
+        else:
+            os.environ['GH_TOKEN'] = "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"
+            service=Service(GeckoDriverManager().install())
+            driver = webdriver.Firefox(service=service)
+            # url = "https://selenium-python.readthedocs.io/getting-started.html"
+            url = "https://vk.com"
+            driver.get(url)
+            # element = driver.find_element()
+            # "//*[ text() = 'Sign in' ]"
+            sing_in_button = WebDriverWait(driver, 20).until(
+                EC.element_to_be_clickable((By.CSS_SELECTOR, ".VkIdForm__form>:first-child")))
+            sing_in_button.click()
+            login = driver.find_element(By.CSS_SELECTOR, ".vkc__TextField__input")
+            login.send_keys()
+            continue_button = driver.find_element(By.CSS_SELECTOR, ".vkc__Button__title")
+            continue_button.click()
+            pyautogui.write()
+            continue_button2 = driver.find_element(By.CSS_SELECTOR, ".vkc__EnterPasswordNoUserInfo__buttonWrap")
+            continue_button2.click()
+            music_button_left = WebDriverWait(driver, 20).until(
+                EC.element_to_be_clickable((By.CSS_SELECTOR, "#l_aud")))
+            music_button_left.click()
+            music_search_input = WebDriverWait(driver, 20).until(
+                EC.element_to_be_clickable((By.CSS_SELECTOR, "#audio_search")))
+            music_search_input.send_keys(music)
+            # start_stop_button = driver.find_element(By.CSS_SELECTOR, ".audio_page_player_icon")
+            # start_stop_button.click()  audio_page__audio_rows _audio_page__audio_rows
+            my_list = test()
+            for i, el in enumerate(my_list):
+                top = driver.find_element(By.CSS_SELECTOR, f".{el}")
+                print(f"{i}-{top.text}")
+                print("====================>")
+            # CatalogBlock__itemsContainer _audio_page__audio_rows_list _audio_pl audio_w_covers
+            # first_music = WebDriverWait(driver, 20).until(
+            #     EC.element_to_be_clickable((By.CSS_SELECTOR, "._audio_row_-2001501935_5501935")))
+            # first_music = driver.find_element(By.CSS_SELECTOR, "")
+            # first_music.click()
+
+            # >:first-child
+            choice = pyautogui.confirm(text="Exit", buttons=["exit", "stay"])
+            if choice == "exit":
+                driver.close()
+
+    selenium()
 
     def vk(info=False):
         if info is True:
@@ -115,17 +181,20 @@ def main():
             pyautogui.keyUp("win")
             time.sleep(1)
 
-    song = pyautogui.prompt(text="Введите музыку", title="Музыка", default="25/17")
-    if song is None:
-        exit()
+
+
+    # song = pyautogui.prompt(text="Введите музыку", title="Музыка", default="25/17")
+    # if song is None:
+    #     exit()
     # change_keyboard_language()
-    time.sleep(1)
-    firefox(info=True)
-    vk(info=True)
-    time.sleep(2)
-    vk_music(sng=song, info=True)
-    next_music()
-    os.system('spd-say "Finished"')
+    # time.sleep(1)
+    # firefox(info=True)
+    # vk(info=True)
+    # time.sleep(2)
+    # vk_music(sng=song, info=True)
+    # next_music(info=True)
+    # selenium()
+    # os.system('spd-say "Finished"')
     restart = pyautogui.confirm(text="Program is finished!", title="Finished", buttons=['Restart', 'Exit'])
     if restart == "Restart":
         main()

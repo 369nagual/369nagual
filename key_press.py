@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+from selenium.common import TimeoutException
+driver = None
+
 def main():
     from sensitive_data import data
     import pyautogui
@@ -17,54 +20,62 @@ def main():
     from selenium.webdriver.support import expected_conditions as EC
 
     def test_what_class_work():
-        to_list = "CatalogBlock__itemsContainer _audio_pl audio_w_covers"
+        to_list = "CatalogBlock__itemsContainer _audio_pl"
+
         from_list = to_list.split(" ")
         print(from_list)
         return from_list
 
     def selenium(music="все будет хорошо", info=False):
+        global driver
         if info:
             print("Selenium test function")
 
         else:
-            os.environ['GH_TOKEN'] = data["GH_TOKEN"]
-            service = Service(GeckoDriverManager().install())
-            driver = webdriver.Firefox(service=service)
-            url = "https://vk.com"
-            driver.get(url)
-            # "//*[ text() = 'Sign in' ]"
-            sing_in_button = WebDriverWait(driver, 20).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR, ".VkIdForm__form>:first-child")))
-            sing_in_button.click()
-            # Sign in end
-            # Email input TextField
-            login = driver.find_element(By.CSS_SELECTOR, ".vkc__TextField__input")
-            login.send_keys(data["vk_login"])
-            continue_button = driver.find_element(By.CSS_SELECTOR, ".vkc__Button__title")
-            continue_button.click()
-            pyautogui.write(data["vk_password"])
-            continue_button2 = driver.find_element(By.CSS_SELECTOR, ".vkc__EnterPasswordNoUserInfo__buttonWrap")
-            continue_button2.click()
-            music_button_left = WebDriverWait(driver, 20).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR, "#l_aud")))
-            music_button_left.click()
-            music_search_input = WebDriverWait(driver, 20).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR, "#audio_search")))
-            music_search_input.send_keys(music)
-            my_list = test_what_class_work()
-            for i, el in enumerate(my_list):
-                top = driver.find_element(By.CSS_SELECTOR, f".{el}")
-                print(f"{i}-{top.text}")
-                print("====================>")
-            # first_music = WebDriverWait(driver, 20).until(
-            #     EC.element_to_be_clickable((By.CSS_SELECTOR, "._audio_row_-2001501935_5501935")))
-            # first_music.click()
-            # >:first-child
-            choice = pyautogui.confirm(text="Exit", buttons=["exit", "stay"])
-            if choice == "exit":
+            try:
+                os.environ['GH_TOKEN'] = data["GH_TOKEN"]
+                service = Service(GeckoDriverManager().install())
+                driver = webdriver.Firefox(service=service)
+                url = "https://vk.com"
+                driver.get(url)
+                # "//*[ text() = 'Sign in' ]"
+                sing_in_button = WebDriverWait(driver, 20).until(
+                    EC.element_to_be_clickable((By.CSS_SELECTOR, ".VkIdForm__form>:first-child")))
+                sing_in_button.click()
+                # Sign in end
+                # Email input TextField
+                login = driver.find_element(By.CSS_SELECTOR, ".vkc__TextField__input")
+                login.send_keys(data["vk_login"])
+                continue_button = driver.find_element(By.CSS_SELECTOR, ".vkc__Button__title")
+                continue_button.click()
+                pyautogui.write(data["vk_password"])
+                continue_button2 = driver.find_element(By.CSS_SELECTOR, ".vkc__EnterPasswordNoUserInfo__buttonWrap")
+                continue_button2.click()
+                music_button_left = WebDriverWait(driver, 20).until(
+                    EC.element_to_be_clickable((By.CSS_SELECTOR, "#l_aud")))
+                music_button_left.click()
+                music_search_input = WebDriverWait(driver, 20).until(
+                    EC.element_to_be_clickable((By.CSS_SELECTOR, "#audio_search")))
+                music_search_input.send_keys(music)
+                time.sleep(10)
+                # my_list = test_what_class_work()
+                # for i, el in enumerate(my_list):
+                #     top = driver.find_element(By.CSS_SELECTOR, f".{el}")
+                #     print(f"{i}-{top.text}")
+                #     print(f"Name:{my_list[i]}")
+                #     print("====================>")
+                first_child = WebDriverWait(driver, 20).until(
+                    EC.element_to_be_clickable((By.CSS_SELECTOR, f".audio_page__audio_rows_list>:first-child")))
+                first_child.click()
+            except TimeoutException:
+                print("TimeoutException")
                 driver.close()
-
-    selenium()
+                change_keyboard_language()
+                selenium()
+            # >:first-child
+            # choice = pyautogui.confirm(text="Exit", buttons=["exit", "stay"])
+            # if choice == "exit":
+            #     driver.close()
 
     def vk(info=False):
         if info is True:
@@ -177,7 +188,11 @@ def main():
     # song = pyautogui.prompt(text="Введите музыку", title="Музыка", default="25/17")
     # if song is None:
     #     exit()
-    # change_keyboard_language()
+    # m = input("Песня или Артист:")
+    m = pyautogui.prompt(text="Введите Песню или Артиста или Артиста и песню!", title="music_search", default="Новый вирус 25/17")
+    change_keyboard_language()
+    selenium(music=m)
+
     # time.sleep(1)
     # firefox(info=True)
     # vk(info=True)

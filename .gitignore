@@ -3,3 +3,4 @@ logs/*.log
 .idea/
 __pycache__/
 sensitive_data.py
+ssh_marina.py

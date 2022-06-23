@@ -2,6 +2,7 @@
 from selenium.common import TimeoutException
 driver = None
 
+
 def main():
     from sensitive_data import data
     import pyautogui
@@ -38,7 +39,6 @@ def main():
                 driver = webdriver.Firefox(service=service)
                 url = "https://vk.com"
                 driver.get(url)
-                # "//*[ text() = 'Sign in' ]"
                 sing_in_button = WebDriverWait(driver, 20).until(
                     EC.element_to_be_clickable((By.CSS_SELECTOR, ".VkIdForm__form>:first-child")))
                 sing_in_button.click()
@@ -57,13 +57,6 @@ def main():
                 music_search_input = WebDriverWait(driver, 20).until(
                     EC.element_to_be_clickable((By.CSS_SELECTOR, "#audio_search")))
                 music_search_input.send_keys(music)
-                time.sleep(10)
-                # my_list = test_what_class_work()
-                # for i, el in enumerate(my_list):
-                #     top = driver.find_element(By.CSS_SELECTOR, f".{el}")
-                #     print(f"{i}-{top.text}")
-                #     print(f"Name:{my_list[i]}")
-                #     print("====================>")
                 first_child = WebDriverWait(driver, 20).until(
                     EC.element_to_be_clickable((By.CSS_SELECTOR, f".audio_page__audio_rows_list>:first-child")))
                 first_child.click()
@@ -72,10 +65,6 @@ def main():
                 driver.close()
                 change_keyboard_language()
                 selenium()
-            # >:first-child
-            # choice = pyautogui.confirm(text="Exit", buttons=["exit", "stay"])
-            # if choice == "exit":
-            #     driver.close()
 
     def vk(info=False):
         if info is True:
@@ -201,11 +190,11 @@ def main():
     # next_music(info=True)
     # selenium()
     # os.system('spd-say "Finished"')
-    restart = pyautogui.confirm(text="Program is finished!", title="Finished", buttons=['Restart', 'Exit'])
-    if restart == "Restart":
-        main()
-    else:
-        exit()
+    # restart = pyautogui.confirm(text="Program is finished!", title="Finished", buttons=['Restart', 'Exit'])
+    # if restart == "Restart":
+    #     main()
+    # else:
+    #     exit()
 
 
 main()

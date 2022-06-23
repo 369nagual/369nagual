@@ -3,16 +3,11 @@ from sensitive_data import data
 from unused_func import change_keyboard_language
 from selenium.common import TimeoutException
 import pyautogui
-import time
 import os
-import pyperclip
-import urllib3
 from selenium import webdriver
 from selenium.webdriver.firefox.service import Service
-from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 from webdriver_manager.firefox import GeckoDriverManager
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -57,16 +52,15 @@ def selenium(music="все будет хорошо", info=False):
 
 
 def main():
-    # m = pyautogui.prompt(text="Введите Песню или Артиста или Артиста и песню!", title="music_search",
-    #                      default="Новый вирус 25/17")
-    text = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x',
-            'c', 'v', 'b', 'n', 'm']
-
-    # for letter in text:
-    #     if letter in
-    # print(list_of_char)
-    # change_keyboard_language()
-    # selenium(music=m)
+    m = pyautogui.prompt(text="Введите Песню или Артиста или Артиста и песню!", title="music_search",
+                         default="Новый вирус 25/17")
+    list_of_char = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd',
+                    'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm']
+    for letter in m:
+        if letter in list_of_char is None:
+            change_keyboard_language()
+            break
+    selenium(music=m)
 
 
 if __name__ == "__main__":

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from random import randint
-from cprint import *
 
 
 def factorial_v1(n):

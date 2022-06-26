@@ -3,7 +3,6 @@ import pyautogui
 
 
 def run_sound():
-    print("Running sound")
     flag = True
     default_value = 100
     while flag:
@@ -21,4 +20,6 @@ def run_sound():
             if exit_point == "Нет":
                 continue
             elif exit_point == "Да":
+                flag = False
+            else:
                 flag = False

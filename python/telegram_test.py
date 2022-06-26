@@ -1,8 +1,6 @@
 # importing all required libraries
-import telebot
-from telethon.sync import TelegramClient
-from telethon.tl.types import InputPeerUser, InputPeerChannel
-from telethon import TelegramClient, sync, events
+from telethon import TelegramClient
+from telethon.tl.types import InputPeerUser
 
 # get your api_id, api_hash, token
 # from telegram as described above

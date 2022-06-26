@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-from sensitive_data import data
 from unused_func import change_keyboard_language
 from selenium.common import TimeoutException
 import pyautogui

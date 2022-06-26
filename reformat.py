@@ -10,3 +10,5 @@ for i, file in enumerate(list_dir):
     elif ".png" in file or ".jpg" in file:
         os.system("mkdir -p images")
         os.system(f"mv {file} images")
+    else:
+        print(file)

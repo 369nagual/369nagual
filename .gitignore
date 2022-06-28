@@ -4,4 +4,3 @@ logs/*.log
 __pycache__/
 sensitive_data.py
 ssh_marina.py
-temp.py

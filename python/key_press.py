@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+driver = None
+
+
 def main():
     from unused_func import change_keyboard_language
     from selenium.common import TimeoutException
@@ -11,8 +14,6 @@ def main():
     from selenium.webdriver.support.ui import WebDriverWait
     from selenium.webdriver.support import expected_conditions as EC
     from database import data
-
-    driver = None
 
     def selenium(music="все будет хорошо", info=False):
         global driver

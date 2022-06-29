@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 driver = None
 
+a = 1
+
 
 def main():
     from unused_func import change_keyboard_language

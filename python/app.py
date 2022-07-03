@@ -60,8 +60,14 @@ def run_sound():
     while flag_inner:
         value = pyautogui.prompt(text="Введите громкость!", title="Sound", default=default_value)
         if value:
-            command = f'''pactl set-sink-volume "$(LANG=C pactl info | grep 'Default Sink' | awk '{{print $3}}')" {value}%
+            if int(value) <= 300:
+                command = f'''pactl set-sink-volume "$(LANG=C pactl info | grep 'Default Sink' | awk '{{print $3}}')" {value}%
     '''
+            else:
+                if pyautogui.alert("Value is greater than it needs to be set smaller value"):
+                    pass
+                else:
+                    pass
             os.system(command)
             default_value = int(value)
             default_value += 10
@@ -72,7 +78,6 @@ def run_sound():
             if exit_point == "Нет":
                 continue
             elif exit_point == "Да":
-                flag_inner = False
                 return first_func()
 
 

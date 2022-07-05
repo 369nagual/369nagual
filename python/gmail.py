@@ -2,10 +2,8 @@
 # your Gmail account
 import smtplib
 from database import data
+from passwords import *
 
-my_email = "vitkashubin@gmail.com"
-user_password = "Yustas2008/2020"
-app_password = "yzaeerlxhbbkldot"
 # creates SMTP session
 s = smtplib.SMTP('smtp.gmail.com', 587)
 

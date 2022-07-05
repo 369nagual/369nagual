@@ -16,7 +16,7 @@ s.login(my_email, app_password)
 # message to be sent
 message = data
 # sending the mail
-s.sendmail(my_email, "vitkashubin@mail.ru", message)
+s.sendmail(my_email, receivers_email, message)
 
 # terminating the session
 s.quit()

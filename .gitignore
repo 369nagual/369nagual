@@ -6,3 +6,5 @@ sensitive_data.py
 ssh_marina.py
 python/token.pickle
 python/hh.py
+python/alarm.py
+alarm_sound.mp3

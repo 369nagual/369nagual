@@ -16,7 +16,8 @@ s.login(my_email, app_password)
 # message to be sent
 message = data
 # sending the mail
-s.sendmail(my_email, receivers_email, message)
+# TO-DO: sending the empty message
+s.sendmail(my_email, receivers_email, str(message))
 
 # terminating the session
 s.quit()

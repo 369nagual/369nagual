@@ -5,5 +5,4 @@ __pycache__/
 sensitive_data.py
 ssh_marina.py
 python/hh.py
-python/alarm.py
 alarm_sound.mp3

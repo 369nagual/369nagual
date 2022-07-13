@@ -5,6 +5,10 @@ def find_element(numbers):
     return list(collection.find())[numbers]
 
 
+def insert_new_element(obj):
+    collection.insert_one(obj)
+
+
 connection = pymongo.MongoClient("mongodb://localhost:27017")
 database = connection.sensitive_data
 collection = database.data

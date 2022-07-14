@@ -43,30 +43,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-'''
-
-
-logs/*
-*.log
-.idea/
-__pycache__/
-sensitive_data.py
-ssh_marina.py
-python/hh.py
-python/alarm.py
-alarm_sound.mp3
-
-
-
-
-
-
-
-def delete_last_element():
-    element = list(collection.find())[-1]
-    collection.delete_one({'_id': ObjectId(element["_id"])})
-
-
-
-'''

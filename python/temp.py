@@ -43,8 +43,8 @@ db = connection.sensitive_data
 collection = db.data
 
 # password = input("Enter password for changing current password!")
-password = "Yustas2008/2020"
-update_password(password)
+# password = ""
+# update_password(password)
 # hashed = hash_password(password)
 # print(f"Hash password: %s" % hashed)
 #

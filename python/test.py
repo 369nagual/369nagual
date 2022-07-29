@@ -876,14 +876,14 @@ import math
 #     print(result)
 #     print(math.e)
 
-num = int(input("Введите число"))
-summery = 0
-while num != 0:
-    last_num = num % 10
-    num //= 10
-    summery += last_num
-    if last_num == 5:
-        print("Обнаружен разрыв")
-        break
-
-print(summery)
+# num = int(input("Введите число"))
+# summery = 0
+# while num != 0:
+#     last_num = num % 10
+#     num //= 10
+#     summery += last_num
+#     if last_num == 5:
+#         print("Обнаружен разрыв")
+#         break
+#
+# print(summery)

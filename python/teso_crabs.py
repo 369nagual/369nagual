@@ -1,23 +1,39 @@
 import json
+import subprocess
 import time
-import requests
+
 import clipboard
 import pyautogui
 from PIL import Image
+from notion.block import HeaderBlock
+from notion.block import NumberedListBlock
+from notion.block import TextBlock
+from notion.client import NotionClient
 from pynput import keyboard
 from pynput.keyboard import Controller
-from notion.client import NotionClient
-from notion.block import NumberedListBlock
 
 key = Controller()
 
 SAVE_FILE = "notion.json"
 
 
+def create_file():
+    with open(SAVE_FILE, "w") as f:
+        json.dump({
+            "notion": [],
+            "login": "",
+            "password": "",
+            "secret": "secret_11KR5LWffeAbJYccYrBjlXDHmFcZZDB1UBm48Bq4qUo",
+            "url": "https://www.notion.so/c53543c9d40a4a6ba298118038e87550",
+            "database_id": "bd892a721a994e0598d5d5870910e688",
+            "token_v2": "ae937ea231d9ab3ea4e0a5880822d8c15d0fd0a01f186c740c90905326fdcfa197b38cf0a2aeb015bcb3c8be6b18d9bd74501982fd75801998f55bb1a6d1c5eebfb7e838a92fe320222b05fa77b0",
+            "title_name": "Marishka Test"
+        }, f)
+
+
 def save_data(d, filepath=None):
     if filepath is None:
         filepath = SAVE_FILE
-
     with open(filepath, "w") as f:
         json.dump(d, f)
 
@@ -25,11 +41,77 @@ def save_data(d, filepath=None):
 def load_data(filepath=SAVE_FILE):
     try:
         with open(filepath, "r") as f:
-            data = json.loads(f.read())
-            return data
+            return json.loads(f.read())
+
     except FileNotFoundError:
-        save_data(filepath, paste())
-        load_data(filepath)
+        create_file()
+        with open(filepath, "r") as f:
+            return json.loads(f.read())
+
+
+def on_activate_i():
+    data = load_data()
+    if paste() and data:
+        if len(data["notion"]) > 0 and data["notion"][-1] == paste():
+            send_message("This is the same text!")
+        else:
+            data["notion"].append(paste())
+            save_data(data)
+    else:
+        send_message("No paste() or data")
+
+    print("On Activate I")
+
+
+def paste():
+    text = clipboard.paste()
+    return text
+
+
+def print_content():
+    print(load_data())
+
+
+def push():
+    data = load_data()
+    client = NotionClient(
+        token_v2="ae937ea231d9ab3ea4e0a5880822d8c15d0fd0a01f186c740c90905326fdcfa197b38cf0a2aeb015bcb3c8be6b18d9bd74501982fd75801998f55bb1a6d1c5eebfb7e838a92fe320222b05fa77b0")
+    page = client.get_block("https://www.notion.so/c53543c9d40a4a6ba298118038e87550")
+    if not data["notion"]:
+        send_message("Списак пуст")
+    else:
+        header_one = pyautogui.prompt(text="Header", title="Enter H2")
+        source = pyautogui.prompt(text="Введите искочник")
+        page.children.add_new(HeaderBlock, title=f"{header_one}")
+        page.children.add_new(TextBlock, title=f"Link: {source}")
+        for i, el in enumerate(data["notion"]):
+            print(f"{i + 1}.{el}")
+            page.children.add_new(NumberedListBlock, title=el)
+    data["notion"] = []
+    save_data(data)
+
+
+def send_message(message):
+    subprocess.Popen(['notify-send', message])
+
+
+def clear_paste():
+    data = load_data()
+    data["notion"] = []
+    save_data(data)
+
+
+# def insert_info():
+#     data = load_data()
+#     change = pyautogui.confirm("Что хотите изменить", buttons=["PAGE", "TOKEN", "Не хочу"])
+#     if change == "TOKEN":
+#         token = pyautogui.prompt("Token")
+#         data["token_v2"] = token
+#     elif change == "PAGE":
+#         page = pyautogui.prompt("Page")
+#         data["url"] = page
+#     elif change == "Не хочу":
+#         return None
 
 
 def take_screenshot():
@@ -41,88 +123,24 @@ def take_screenshot():
     screenshot.show()
 
 
-def paste():
-    text = clipboard.paste()
-    return text
-
-
-def on_activate_i():
-    data = load_data()
-    if paste():
-        data["notion"].append(paste())
-        save_data(data)
-    print("On Activate I")
-
-
-def print_content():
-    data = load_data()
-    print(data)
-
-
-def login(relog=None):
-    if relog is None:
-        re_log = pyautogui.confirm(text='Login', title='Login', buttons=['Login', 'Re-login'])
-    else:
-        re_log = "Re-login"
-    if re_log == "Login":
-        return load_data()["login"], load_data()["password"]
-    elif re_log == "Re-login":
-        log_in = pyautogui.prompt(text="Login", title="login")
-        password = pyautogui.password(text='Password', title='password', default='', mask='☕')
-        data = load_data()
-        data["login"] = log_in
-        data["password"] = password
-        save_data(data)
-        return load_data()["login"], load_data()["password"]
-
-
 #
 #
 #
-#
-def push():
-    data = load_data()
-    if "title_name" in data:
-        answer = pyautogui.confirm("Do you want to change you title?", buttons=["No", "Yes"])
-        if answer == "Yes":
-            title_name = pyautogui.prompt("Enter your new title: ")
-            if title_name:
-                data["title_name"] = title_name
-            else:
-                data["title_name"] = "None"
-    else:
-        title_name = pyautogui.prompt("Enter Title: ")
-        data["title_name"] = title_name
-    print(data)
-    token = data["token_v2"]
-    url = data["url"]
-    client = NotionClient(token_v2=token)
-    page = client.get_block(url)
-    if data["notion"]:
-        page.title = data["title_name"]
-        for i, el in enumerate(data["notion"]):
-            print(f"{i}. {el}")
-            page.children.add_new(NumberedListBlock, title=f"{el}")
-        data["notion"] = []
-        save_data(data)
-    else:
-        print("List is mt")
 
 
 #
 
 
 #
+
 #
-#
-# with open("page.txt", "w") as f:
-#     f.write(page)
 #
 #
 #
 #
 with keyboard.GlobalHotKeys({
     '<ctrl>+<alt>+i': push,
-    '<ctrl>+<shift>+i': on_activate_i
+    '<ctrl>+<alt>+o': on_activate_i,
+    '<ctrl>+<alt>+c': clear_paste
 }) as h:
     h.join()

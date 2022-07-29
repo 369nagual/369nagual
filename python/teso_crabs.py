@@ -5,8 +5,8 @@ import time
 import clipboard
 import pyautogui
 from PIL import Image
-from notion.block import HeaderBlock
 from notion.block import NumberedListBlock
+from notion.block import HeaderBlock
 from notion.block import TextBlock
 from notion.client import NotionClient
 from pynput import keyboard

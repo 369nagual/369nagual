@@ -1752,3 +1752,67 @@ bad_packs = 0
 #     i_list[1] = round(i_list[1] * (1 + percentage / 100), 2)
 #
 # print(f"Новый ассортимент с увел. ценой: {goods}")
+
+# List comprehensions
+
+# square = [x ** 2 for x in range(10)]
+# print(square)
+
+# def get_higher_price(percent, price):
+#     return round(price * (1 + percent / 100), 2)
+#
+#
+# price_now = [1.09, 23.56, 57.84, 4.56, 6.78]
+# first_percent = int(input("Повышение на первый год:"))
+# second_percent = int(input("Повышение на второй год:"))
+#
+# prices_first = [get_higher_price(first_percent, el) for el in price_now]
+# prices_second = [get_higher_price(second_percent, el) for el in price_now]
+#
+# print(round(sum(price_now)))
+# print(round(sum(prices_first)))
+# print(round(sum(prices_second)))
+
+# Задача 1. Кубы и квадраты
+# start_of_range = int(input("Левая граница: "))
+# end_of_range = int(input("Правая граница: "))
+#
+# cubes_of_range = [num ** 3 for num in range(start_of_range, end_of_range + 1)]
+# square_of_range = [num ** 2 for num in range(start_of_range, end_of_range + 1)]
+#
+# print(f"Список кубов чисел в диапазоне от {start_of_range} до {end_of_range}: {cubes_of_range}")
+# print(f"Список квадратов чисел в диапазоне от {start_of_range} до {end_of_range}: {square_of_range}")
+
+
+# Задача 2. Сообщение
+
+
+# word = input("Введите строку: ")
+# char = input("Введите дополнительный символ: ")
+# dubble_and_sep_word = [dubble * 2 for dubble in word]
+# glued_word_char = [char_add + char for char_add in dubble_and_sep_word]
+#
+# print(f"Список удвоенных символов: {dubble_and_sep_word}")
+#
+# print(f"Склейка с дополнительным символом: {glued_word_char}")
+
+
+# Задача 3. Повышение цен
+
+# def formula_increasing_percent(percent, price):
+#     return price * (1 + percent / 100)
+#
+#
+# def formula_decreasing_percent(percent, price):
+#     return price * (1 - percent / 100)
+#
+#
+# current_price = [round(float(input("Цена на товар: ")), 2) for _ in range(5)]
+# # current_price = [1.09, 23.56, 57.84, 4.56, 6.78]
+# first_percent = int(input("Повышение на первый год: "))
+# second_percent = int(input("Повышение на второй год: "))
+#
+# first_year = [formula_increasing_percent(first_percent, price) for price in current_price]
+# second_year = [formula_increasing_percent(second_percent, price) for price in current_price]
+#
+# print(f"Sum of first year: {round(sum(current_price), 2)}, {round(sum(first_year), 2)}, {round(sum(second_year), 2)}")

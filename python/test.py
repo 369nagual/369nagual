@@ -731,6 +731,7 @@
 #     print()
 
 # # REGEX testing
+import random
 import re
 
 #
@@ -1816,3 +1817,163 @@ bad_packs = 0
 # second_year = [formula_increasing_percent(second_percent, price) for price in current_price]
 #
 # print(f"Sum of first year: {round(sum(current_price), 2)}, {round(sum(first_year), 2)}, {round(sum(second_year), 2)}")
+
+# 18.3 List comprehensions с условиями. Модуль random
+
+# squares_odds = [x ** 2 for x in range(1, 10 + 1) if x % 2 != 0]
+# cubes_even = [x ** 3 for x in range(1, 10 + 1) if x % 2 == 0]
+# squares_cubes = [(x ** 2 if x % 2 != 0 else x ** 3) for x in range(1, 10 + 1)]
+#
+# print(squares_odds)
+# print(cubes_even)
+# print(squares_cubes)
+
+# import random
+#
+# fst_squad = [random.randint(50, 80) for _ in range(10)]
+# snd_squad = [random.randint(30, 60) for _ in range(10)]
+# print(fst_squad)
+# print(snd_squad)
+# squad_conditions = [("Dead" if fst_squad[i] + snd_squad[i] > 100 else "Alive") for i in range(10)]
+# print(squad_conditions)
+
+
+# Задача 1. Список чётных чисел
+
+# left_range = int(input("Left Range: "))
+# right_range = int(input("Right Range: "))
+#
+# even_list = [even for even in range(left_range, right_range + 1) if even % 2 == 0]
+# print(even_list)
+
+
+# Задача 2. Магазин
+
+# original_prices = [1.25, -9.45, 10.22, 3.78, -5.92, 1.16]
+#
+# print(original_prices)
+# new_prices = [0 if new < 0 else new for new in original_prices]
+# print(new_prices)
+# # or
+# new_prices = [new for new in original_prices if new > 0]
+# print(new_prices)
+
+# Задача 3. Отряды
+
+# monsters = 10
+#
+# fst_squad = [random.randint(50, 80) for _ in range(monsters)]
+# snd_squad = [random.randint(30, 60) for _ in range(monsters)]
+# print(fst_squad)
+# print(snd_squad)
+# trd_squad = [("DEAD" if fst_squad[i] + snd_squad[i] > 100 else "ALIVE") for i in range(monsters)]
+#
+# print(trd_squad)
+
+
+# 18.4 Срезы списков
+# Video Example
+# server_numbers = [num for num in range(1, 100 + 1) if num % 10 == 0]
+# print(server_numbers)
+# new_list = server_numbers[:]
+# new_list[3] = 0
+#
+# new_list.extend(server_numbers)
+# print(new_list)
+#
+# out = [unic if new_list.count(unic) <= 1 else f"!{unic}" for unic in new_list]
+# unic_list = [unic_only for unic_only in out if isinstance(unic_only, int)]
+# print(out)
+# print(unic_list)
+# print(server_numbers)
+# print(server_numbers[::-1])
+# print(server_numbers.reverse())
+# print(server_numbers)
+
+
+# Задача 1. Анализ цен
+
+# original_prices = [-12, 3, 5, -2, 1]
+#
+# new_prices = original_prices[:]
+# print(new_prices)
+# count_money_lose = [money for money in new_prices if money < 0]
+# count = 0
+# count_money_lose = abs([count := count - count_money_lose[i] for i in range(len(count_money_lose))][-1])
+# print(count_money_lose)
+#
+# import random
+#
+# original_prices = [random.randrange(-20, 35) for _ in range(5)]
+# new_prices = original_prices[:]
+# print(f"Copy: {new_prices}")
+#
+# sum_of_lost_prices = [el for el in new_prices if el < 0]
+# new_prices = [0 if minus < 0 else minus for minus in new_prices]
+# print(f"Negative is Zero: {new_prices}")
+# print(f"Sum of lost money: {abs(sum(sum_of_lost_prices))}")
+#
+# enter_str = "\n"
+# print(f"{enter_str * 10}")
+#
+# char = "$"
+# rows = 9
+# rows_i = [0, rows - 1]
+#
+# cols = 13
+# cols_i = cols - 1
+#
+# for row in range(rows):
+#     print(f"{char}", end=" ")
+#     for col in range(cols):
+#         if row == rows_i[0] or row == rows_i[-1]:
+#             print(f"{char}", end=" ")
+#         elif col == cols_i:
+#             print(f"{char}", end=" ")
+#         else:
+#             print(f" ", end=" ")
+#     print()
+
+# new_prices = original_prices[:]
+# print(f"Copy: {new_prices}")
+# new_prices = [0 if negative < 0 else negative for negative in new_prices]
+# print(f"Negative is Zero: {new_prices}")
+#
+# print(f"Sum of lost money: {sum(new_prices) - sum(original_prices)}")
+
+
+# Задача 2. Срезы
+
+# nums = [48, -10, 9, 38, 17, 50, -5, 43, 46, 12]
+#
+# print(f"1. {nums[:5]}")
+# print(f"2. {nums[:-2]}")
+# print(f"3. {[nums[i] for i in range(len(nums)) if i % 2 == 0]}")
+# print(f"4. {[nums[i] for i in range(len(nums)) if i % 2 != 0]}")
+# print(f"5. {nums[::-1]}")
+# print(f"6. {nums[::-2]}")
+
+
+# Задача 3. Удаление части
+# from random import randint
+#
+#
+# def random_a_b(range_a=1, range_b=99):
+#     a = randint(range_a, range_b)
+#     b = randint(range_a, range_b)
+#     while a >= b:
+#         a = randint(range_a, range_b)
+#         b = randint(range_a, range_b)
+#
+#     return [a, b]
+#
+#
+# list_len = int(input("Length of array: "))
+# # list_len = 5
+# random_list = [randint(1, 99) for _ in range(list_len)]
+# print(random_list)
+# a_b_list = random_a_b(0, len(random_list))
+# random_list = random_list[a_b_list[0]:a_b_list[1]]
+# print(random_list)
+# print(a_b_list)
+

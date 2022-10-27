@@ -4843,7 +4843,3 @@ import socks
 
 
 # 23.5 Перемещение курсора в файле. Метод seek
-
-name = input("")
-age = int(input(""))
-job = input("")

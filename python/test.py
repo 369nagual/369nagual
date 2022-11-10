@@ -4843,3 +4843,66 @@ import socks
 
 
 # 23.5 Перемещение курсора в файле. Метод seek
+
+
+# 24.1
+# import zipfile
+# import os
+# import collections
+#
+#
+# def print_stats(stats, write_to="file"):
+#     if write_to == "file":
+#         new_file = open("result.txt", "a")
+#         new_file.write("+{:-^19}+\n".format("+"))
+#         for i_char, i_freq in stats.items():
+#             new_file.write("|{:^9}:{:^9}|\n".format(i_char, i_freq))
+#         new_file.write("+{:-^19}+\n".format("+"))
+#     elif write_to == "print":
+#         print("+{:-^19}+".format("+"))
+#         for i_char, i_freq in stats.items():
+#             print("|{:^9}:{:^9}|".format(i_char, i_freq))
+#         print("+{:-^19}+".format("+"))
+#     else:
+#         print("Second arg needs to be 1.) file 2.) print")
+#
+#
+# def collect_stats(file_name=os.path.join("voyna-i-mir.zip")):
+#     result = {}
+#     path_to_txt_file = os.path.abspath(os.path.join("voyna-i-mir.txt"))
+##     Check if file exits
+# text_file_name = path_to_txt_file.split(os.path.sep)[-1]
+# if not os.path.exists(path_to_txt_file):
+#     print("File \"{0}\" do not exitst".format(text_file_name))
+#     zipfile.ZipFile("voyna-i-mir.zip", "r").extractall()
+#     print("Zip is extracted")
+# else:
+#     print("File \"{0}\" exists!".format(text_file_name))
+#
+# text_file = open(text_file_name, "r", encoding="utf-8")
+# for i_line in text_file:
+#     for i_char in i_line:
+#         if i_char.isalpha():
+#             if i_char in result:
+#                 result[i_char] += 1
+#             else:
+#                 result[i_char] = 1
+#
+# return result
+#
+#
+# def sorted_by_frequency(stats_dict, reverse=False):
+#     sorted_values = sorted(stats_dict.values(), reverse=reverse)
+#     sorted_dict = collections.OrderedDict()
+#     for i_values in sorted_values:
+#         for j_key in stats_dict.keys():
+#             if stats_dict[j_key] == i_values:
+#                 sorted_dict[j_key] = i_values
+#     return sorted_dict
+#
+#
+# stats = collect_stats("voyna-i-mir.zip")
+# stats = sorted_by_frequency(stats)
+# print(stats)
+# print_stats(stats, "print")
+#

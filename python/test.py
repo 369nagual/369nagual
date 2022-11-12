@@ -4975,3 +4975,27 @@ import socks
 #     print("IndexError — выход за границы списка")
 # except:
 #     print("Остальные исключения.")
+
+
+# Задача 2. Возраст
+# import random
+#
+# format_str = "«{0} — {1}»."
+# try:
+#     ages_file = open("ages.txt", "r")
+# except FileNotFoundError:
+#     ages_file = open("ages.txt", "w")
+#     for i_age in range(11):
+#         ages_file.write(str(random.randint(12, 85)) + "\n")
+#
+# result_file = open("result.txt", "w")
+# read_age_file = open("ages.txt", "r")
+#
+# text_ages = read_age_file.read()
+#
+# for i, i_age in enumerate(text_ages.split()):
+#     result_file.write(format_str.format(chr(97 + i), i_age) + "\n")
+# # #FileExistsError - попытка создания файла или директории, которая уже существует.
+#
+# file = open("ages.txt", "x")
+# file.write("something...")

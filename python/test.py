@@ -4906,3 +4906,72 @@ import socks
 # print(stats)
 # print_stats(stats, "print")
 #
+
+# 24.2 Обработка исключений: операторы try except
+
+# Video my try exept -2 2  ZeroExeption
+# def divide(number):
+#     return 10 / number
+#
+#
+# def sum_of_divided(left, right):
+#     total_sum = 0
+#     for i_range in range(left, right + 1):
+#         try:
+#             total_sum += divide(i_range)
+#             print(total_sum)
+#         except ZeroDivisionError:
+#             print("На ноль делить нельзя!")
+#     return total_sum
+#
+#
+# write_file_name = "ranges.txt"
+#
+# try:
+#     file = open(write_file_name, "r+")
+# except FileNotFoundError:
+#     file = open(write_file_name, "w+")
+#
+# file_read = file.read()
+# if len(file_read.split()) < 1:
+#     list_of_ranges = []
+#
+#     while True:
+#         diapason = input("Введите диапозон:")
+#         if diapason == "exit":
+#             list_of_ranges[-1] = list_of_ranges[-1][:-1]
+#             break
+#
+#         list_of_ranges.append(diapason + "\n")
+#         print("Добавлено: ", len(list_of_ranges))
+#     file.writelines(list_of_ranges)
+# else:
+#     total = 0
+#     for i_line in file_read.split("\n"):
+#         l, r = i_line.split()
+#         total += sum_of_divided(int(l), int(r))
+#     print("Общая сумма:", total)
+# file.close()
+#
+#
+
+
+# Задача 1. Пятый элемент
+
+
+# BRUCE_WILLIS = 42
+#
+# try:
+#     input_data = input('Введите строку: ')
+#
+#     leeloo = int(input_data[4])
+#
+#     result = BRUCE_WILLIS * leeloo
+#
+#     print(f'- Leeloo Dallas! Multi-pass № {result}!')
+# except ValueError:
+#     print("ValueError — невозможно преобразовать к числу")
+# except IndexError:
+#     print("IndexError — выход за границы списка")
+# except:
+#     print("Остальные исключения.")

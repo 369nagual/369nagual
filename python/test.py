@@ -4999,3 +4999,28 @@ import socks
 #
 # file = open("ages.txt", "x")
 # file.write("something...")
+
+## TODO дописать в функцию параметр (write or read) list если файл создан - читать если нет записать
+# def create_list_of_elements(lst_length=100, file_name="file_with_list.txt"):
+#     print("Создание списка элементов.")
+#     file = open(file_name, "a", encoding="utf-8")
+#     new_list = []
+#     start = 1
+#     repeat = 0
+#     for i in range(start, lst_length + 1):
+#         el = input(f"{i + repeat} Элемент:")
+#         if el == " " or el == "":
+#             print("Do you want to exit? y/n")
+#             if input() == "y":
+#                 break
+#             else:
+#                 repeat -= 1
+#                 continue
+#         new_list.append(el)
+#     print(f"Список сохранится в файле {file_name}")
+#     file.write("\n".join(new_list) + "\n")
+#     print("Returned: []")
+#     return new_list
+#
+#
+# create_list_of_elements(10, "ages.txt")

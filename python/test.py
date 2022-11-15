@@ -5001,26 +5001,51 @@ import socks
 # file.write("something...")
 
 ## TODO дописать в функцию параметр (write or read) list если файл создан - читать если нет записать
-# def create_list_of_elements(lst_length=100, file_name="file_with_list.txt"):
-#     print("Создание списка элементов.")
-#     file = open(file_name, "a", encoding="utf-8")
-#     new_list = []
-#     start = 1
-#     repeat = 0
-#     for i in range(start, lst_length + 1):
-#         el = input(f"{i + repeat} Элемент:")
-#         if el == " " or el == "":
-#             print("Do you want to exit? y/n")
-#             if input() == "y":
-#                 break
-#             else:
-#                 repeat -= 1
-#                 continue
-#         new_list.append(el)
-#     print(f"Список сохранится в файле {file_name}")
-#     file.write("\n".join(new_list) + "\n")
-#     print("Returned: []")
-#     return new_list
+# def create_list_of_elements(lst_length=100, file_name="file_with_list.txt", mode="w"):
+#     try:
+#         file = open(file_name, mode="r+", encoding="utf-8")
+#     except FileNotFoundError:
+#         file = open(file_name, mode="w+", encoding="utf-8")
+#         print("File Not Found!")
+#     if mode == "r":
+#         return {"text": file.read().split("\n"), "file": file_name[:-4]}
+#     elif mode == "w":
+#         print("Создание списка элементов.")
+#         new_list = []
+#         start = 1
+#         repeat = 0
+#         for i in range(start, lst_length + 1):
+#             el = input(f"{i + repeat} Элемент:")
+#             if el == " " or el == "":
+#                 print("Do you want to exit? y/n")
+#                 if input() == "y":
+#                     break
+#                 else:
+#                     repeat -= 1
+#                     continue
+#             new_list.append(el)
+#         print(f"Список сохранится в файле {file_name}")
+#         file.write("\n".join(new_list))
+#         return {"text": new_list, "file": file_name[:-4]}
+#     else:
+#         print("Mode is not correct")
 #
 #
-# create_list_of_elements(10, "ages.txt")
+# list_of_names = create_list_of_elements(10, "name_and_age.txt", mode="w")
+# file_name = list_of_names["file"]
+# file_list = list_of_names["text"]
+#
+# if len(file_list) == 1 and file_list[0] == '':
+#     print("The file is empty!")
+# else:
+#     print("*{:=^19}*".format(file_name))
+#     print("*{:=^9}={:=^9}*".format("Name", "Age"))
+#     for line in file_list:
+#         name_age = line.split()
+#         if len(name_age) > 1:
+#             name, age = name_age
+#             print("|{:^9}:{:^9}|".format(name, age))
+#         else:
+#             raise ValueError("User: {name} has only one value Need to have {name} and {age}")
+#     else:
+#         print("*{:=^19}*".format(str(len(file_list))))

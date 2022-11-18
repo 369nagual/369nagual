@@ -5049,3 +5049,60 @@ import socks
 #             raise ValueError("User: {name} has only one value Need to have {name} and {age}")
 #     else:
 #         print("*{:=^19}*".format(str(len(file_list))))
+
+
+# # TODO: Read and complete this but for now I go further
+# Задача 1. Имена
+# def cmd(command="whoami", sleep=0, wait=False):
+#     if wait is True:
+#         signal = input("Press ENTER to remove file or write SECONDS to wait: ")
+#         try:
+#             signal[0]
+#         except IndexError:
+#             print("Running command.")
+#         else:
+#             print(f"Sleeping for {signal} seconds")
+#             time.sleep(int(signal))
+#     elif sleep:
+#         print(f"Sleeping for {sleep} seconds")
+#         time.sleep(sleep)
+#     os.system(command)
+#
+#
+# def main():
+#     def write_names(file_name, num_of_people):
+#         file = open(file_name, "w+")
+#         for _ in range(num_of_people - 1):
+#             file.write(input("Enter name: ") + "\n")
+#         else:
+#             file.write(input("Enter name: "))
+#         return file
+#
+#     min_database_len = 2
+#     n_people_name = 2
+#     file_given = "people.txt"
+#     try:
+#         file = open(file_given, "r")
+#     except FileNotFoundError:
+#         file_text = write_names(file_given, n_people_name)
+#         print(file_text)
+#     else:
+#         file_text = file.read().split("\n")
+#         file.close()
+#         print(file_text)
+#
+#     all_letters_in_names = 0
+#     for i, i_line in enumerate(file_text, start=1):
+#         name_len = len(i_line)
+#         if len(i_line) < min_database_len:
+#             raise ValueError(
+#                 "Имя должно быть больше {} символов. Имя {} на {} строке, имеет {} символов."
+#                 .format(min_database_len, i_line, i, name_len))
+#         all_letters_in_names += name_len
+#
+#     print(f"Letters count: {all_letters_in_names}")
+#
+#
+# if __name__ == '__main__':
+#     # main()
+#     cmd("git clean -f")

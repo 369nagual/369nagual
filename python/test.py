@@ -5106,3 +5106,41 @@ import socks
 # if __name__ == '__main__':
 #     # main()
 #     cmd("git clean -f")
+
+# Задача 2. Логирование
+# import time
+#
+#
+# def write_log(error, file_name=None):
+#     if file_name is None:
+#         file_name = "error.log"
+#
+#     with open(file_name, "a") as _:
+#         _.write(f'{time.strftime("%c", time.localtime())} {str(error)}\n')
+#
+#
+# def cnt_palindrom(file_name, try_seek=0):
+#     with open(file_name, "r") as file:
+#         file_text = file.read()
+#     list_of_lines = file_text.split("\n")
+#     count_palindrom = 0
+#     count_not_palindrom = 0
+#     for line_n, line_value in enumerate(list_of_lines, start=1):
+#         if line_value.isdigit():
+#             raise ValueError("Error on line {}. Value {} is a number while needs to be a string."
+#                              .format(line_n, line_value))
+#         elif line_value == line_value[::-1]:
+#             count_palindrom += 1
+#         else:
+#             count_not_palindrom += 1
+#             print(line_n, line_value, "is not a palindrom.")
+#     return f"{str(count_palindrom)} palindroms.\n{count_not_palindrom} not palindroms."
+#
+#
+# try:
+#     print(cnt_palindrom("words.txt"))
+# except ValueError as err:
+#     with open("error.log", "a") as log:
+#         log.write(f'{time.strftime("%c", time.localtime())} {str(err)}\n')
+#     raise
+#

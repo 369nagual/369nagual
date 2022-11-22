@@ -1100,6 +1100,7 @@ import socks
 
 Сумма индексов: 3'''
 
+
 #
 # word = input("Введите слово: ")
 #
@@ -5144,3 +5145,47 @@ import socks
 #         log.write(f'{time.strftime("%c", time.localtime())} {str(err)}\n')
 #     raise
 #
+
+# 24.6 Практическая работа
+
+# Что входит в практическую работу
+
+# Задача 1. Имена — 2
+# Задача 2. Координаты
+# Задача 3. Счастливое число
+# Задача 4. Регистрация
+# Задача 5. Текстовый калькулятор
+# Задача 6. Чатs
+
+
+# Задача 1. Имена — 2
+
+def create_file_with_names_n(file_name, n_people):
+    with open(file_name, "w+") as file:
+        for i in range(1, n_people + 1):
+            name = input(f"{i}. Введите имя человека: ")
+            if i < n_people:
+                file.write(name + "\n")
+            else:
+                file.write(name)
+
+
+# create_file_with_names_n("people.txt", 5)
+
+
+def count_names_char(file_name, min_value=3):
+    with open(file_name, "r+") as file:
+        file_text = file.read().splitlines()
+        count_char = sum([len(line) for line in file_text])
+        try:
+            for n_line, name in enumerate(file_text, start=1):
+                if len(name) < min_value:
+                    err = "Ошибка: менее {} символов в строке {}.".format(min_value, n_line)
+                    raise ValueError(err)
+        except ValueError as err:
+            print(err)
+
+    return "Общее количество символов: {}".format(count_char)
+
+
+print(count_names_char("people.txt"))
